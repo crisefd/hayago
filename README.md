@@ -1,19 +1,17 @@
 # Hayago
 
-To start your Phoenix server:
+The Go game, implemented with Phoenix LiveView.
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+> Hayago (早碁) means "quick go" or "fast go". In the context of Go, it means "quick play".
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Usage
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Check out the [starter](https://github.com/jeffkreeftmeijer/hayago/tree/started) branch to follow along with the [article](https://blog.appsignal.com/2019/06/18/elixir-alchemy-building-go-with-phoenix-live-view.html). The [master](https://github.com/jeffkreeftmeijer/hayago/tree/master) branch holds the completed and [deployed](https://hayago.herokuapp.com) version of the project.
 
-## Learn more
+## Future
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+Some more features planned for the next part in the Go-game in Elixir series:
+
+1. History, to allow players to undo (and redo) moves
+2. The ko rule, which prevents repeating moves
+3. Scoring
