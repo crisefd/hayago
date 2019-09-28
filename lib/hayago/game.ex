@@ -1,10 +1,43 @@
 defmodule Hayago.Game do
   alias Hayago.{ Game, State}
-  # A game's history is a list of states
+  use GenServer, restart: :transient
+
+
   defstruct history: [%State{}], index: 0
+
+  @timeout 600_000
+
+  # === Public API =====
+
+  def start_link(options) do
+    GenServer.start_link(__MODULE__, %Game{}, options)
+  end
 
   # Returns the desired state from the list
   def state(%Game{history: history, index: index}), do: Enum.at(history, index)
+
+  # === GenServer callbacks ===
+
+  @impl true
+  def init(game), do: {:ok, game, @timeout}
+
+  @impl true
+  def handle_call(:game, _from, game) do
+    {:reply, game, game, @timeout}
+  end
+
+  @impl true
+  def handle_cast({:place, position}, game) do
+    {:noreply, Game.place(game, position), @timeout}
+  end
+
+  @impl true
+  def handle_cast({:jump, destination}, game) do
+    {:noreply, Game.jump(game, destination), @timeout}
+  end
+
+  @impl true
+  def handle_info(:timeout, game), do: {:stop, :normal, game}
 
   # Updates the game by adding a new state at the top of th list
   def place(%Game{history: history, index: index} = game, position) do

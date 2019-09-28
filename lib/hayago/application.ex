@@ -9,13 +9,11 @@ defmodule Hayago.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      HayagoWeb.Endpoint
-      # Starts a worker by calling: Hayago.Worker.start_link(arg)
-      # {Hayago.Worker, arg},
+      HayagoWeb.Endpoint,
+      {Registry, keys: :unique, name: Hayago.GameRegistry},
+      {DynamicSupervisor, strategy: :one_for_one, name: Hayago.GameSupervisor}
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Hayago.Supervisor]
     Supervisor.start_link(children, opts)
   end
