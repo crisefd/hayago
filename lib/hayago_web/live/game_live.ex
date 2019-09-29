@@ -54,7 +54,7 @@ defmodule HayagoWeb.GameLive do
 
   defp assign_game(%{assigns: %{name: name}} = socket) do
     game = GenServer.call(via_tuple(name), :game)
-    assign(socket, game, state: Game.state(game))
+    assign(socket, game: game, state: Game.state(game))
   end
 
 end
